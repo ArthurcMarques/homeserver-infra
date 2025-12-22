@@ -1,0 +1,29 @@
+services:
+  netdata:
+    image: netdata/netdata:stable
+    container_name: netdata
+    hostname: homeserver
+    restart: unless-stopped
+
+    cap_add:
+      - SYS_PTRACE
+
+    security_opt:
+      - apparmor:unconfined
+
+    volumes:
+      - /data/apps/netdata/config:/etc/netdata
+      - /data/apps/netdata/lib:/var/lib/netdata
+      - /data/apps/netdata/cache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
