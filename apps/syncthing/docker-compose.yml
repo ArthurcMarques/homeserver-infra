@@ -1,0 +1,23 @@
+services:
+  syncthing:
+    image: lscr.io/linuxserver/syncthing:latest
+    container_name: syncthing
+    hostname: homeserver
+    restart: unless-stopped
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+
+    volumes:
+      - /data/sync:/data
+      - /data/apps/syncthing/config:/config
+
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+
