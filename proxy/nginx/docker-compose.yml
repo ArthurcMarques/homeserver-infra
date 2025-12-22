@@ -4,9 +4,6 @@ services:
     container_name: nginx
     restart: unless-stopped
 
-    ports:
-      - "80:80"
-
     volumes:
       - ./conf.d:/etc/nginx/conf.d:ro
       - ./html:/usr/share/nginx/html:ro
@@ -17,3 +14,4 @@ services:
 networks:
   proxy:
     external: true
+
