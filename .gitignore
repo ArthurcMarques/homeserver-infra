@@ -1,0 +1,11 @@
+.env
+*.key
+*.pem
+
+volumes/
+data/
+
+*.swp
+*.bak
+*.tmp
+.DS_Store
