@@ -4,15 +4,12 @@ services:
     container_name: cloudflared
     restart: unless-stopped
 
-    # Importa as variáveis do arquivo .env (que está 2 pastas acima)
+    # Injeta as variáveis do .env diretamente no container
     env_file:
       - ../.env
 
-    # Passa o token para o container
-    environment:
-      - TUNNEL_TOKEN=${CLOUDFLARED_TOKEN}
-
-    # O comando fica limpo, sem expor a senha
+    # Remova a seção environment! O container vai ler TUNNEL_TOKEN direto do env_file.
+    
     command: tunnel run
 
     networks:
