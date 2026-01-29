@@ -4,7 +4,16 @@ services:
     container_name: cloudflared
     restart: unless-stopped
 
-    command: tunnel run --token eyJhIjoiOGE4ODBjZjcwY2M1NWRlNzZlMTI4MDlkYTZmYTUyYTQiLCJ0IjoiNTU4NDc2ZjctZDZkOS00YTE1LTg4NTctNTYyZjQzNDEwOTRmIiwicyI6Ik9UVTJZamczWlRRdFpXVTBOUzAwWVRnNUxXSXlaRGt0TURBek9EZzBNVFkzWm1ZNCJ9
+    # Importa as variáveis do arquivo .env (que está 2 pastas acima)
+    env_file:
+      - ../../.env
+
+    # Passa o token para o container
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARED_TOKEN}
+
+    # O comando fica limpo, sem expor a senha
+    command: tunnel run
 
     networks:
       - proxy
